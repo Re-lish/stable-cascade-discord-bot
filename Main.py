@@ -28,7 +28,7 @@ def setEmbed(title, description, field1Name="", field1Value=""):
 async def func(interaction: discord.Interaction, prompt: str):
     await interaction.response.defer()
     try:
-        image = await StableDiffusion.genImg(prompt_=prompt)
+        image = await StableDiffusion.generate_image(prompt_=prompt)
         await interaction.followup.send(
             content=f"{interaction.user.name} generated: **{prompt}**",
             file=discord.File(image))
