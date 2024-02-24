@@ -28,7 +28,7 @@
   },
   "4": {
     "inputs": {
-      "ckpt_name": "dreamshaperXL10_alpha2Xl10.safetensors"
+      "ckpt_name": "YOUR MODEL NAME"
     },
     "class_type": "CheckpointLoaderSimple"
   },
@@ -52,7 +52,7 @@
   },
   "7": {
     "inputs": {
-      "text": "nsfw, text, watermark, low-quality, signature, moiré pattern, downsampling, aliasing, distorted, blurry, glossy, blur, jpeg artifacts, compression artifacts, poorly drawn, low-resolution, bad, distortion, twisted, excessive, exaggerated pose, exaggerated limbs, grainy, symmetrical, duplicate, error, pattern, beginner, pixelated, fake, hyper, glitch, overexposed, high-contrast, bad-contrast, multiple limbs",
+      "text": "NEGATIVE PROMPT",
       "clip": [
         "4",
         1
