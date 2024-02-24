@@ -1,13 +1,12 @@
 ##Project by Michael Yang
 #This is a stable diffusion bot that utilises comfyUI and stable diffusion model xl.
-##
+
 import asyncio
 import os
 from dotenv import load_dotenv
 import discord
 import StableDiffusion
 from discord.ext import commands
-
 
 load_dotenv()
 serverid = os.getenv('SERVER_ID')
@@ -24,10 +23,6 @@ def setEmbed(title, description, field1Name="", field1Value=""):
     if field1Name != "" and field1Value != "":
         embed.add_field(name=field1Name, value=field1Value)
     return embed
-
-current_song = ""
-
-
 
 @bot.tree.command(name="genimage", description="Generate an image")
 async def func(interaction: discord.Interaction, prompt: str):
