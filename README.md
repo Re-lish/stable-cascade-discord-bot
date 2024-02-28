@@ -1,5 +1,5 @@
 # **Stable diffusion discord bot**
-This discord bot allows users to generate images simply with a command.
+Users can generate images simply with a command.
 
 
 #### Requirements:
