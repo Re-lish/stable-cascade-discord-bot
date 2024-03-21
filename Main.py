@@ -43,6 +43,9 @@ class styleMenu(discord.ui.View):
      ])
 
     async def select_style(self, interaction: discord.Interaction, select_item: discord.ui.Select):
+        global imageRequestsQueue
+        global prompt_
+        global IS_GENERATING
         style = select_item.values[0]
         styles = {"sai-anime": "Anime",
                   "artstyle-hyperrealism": "Hyperrealism",
@@ -57,20 +60,27 @@ class styleMenu(discord.ui.View):
                   "misc-kawaii": "Kawaii",
                   "misc-horror": "Horror"
                   }
+        if (imageRequestsQueue.qsize() == 0):
+            QUEUE_IS_EMPTY = True
+        imageRequestsQueue.put(style+"~~"+prompt_)
         await interaction.response.defer()
         orig_msg = await interaction.original_response()
-        await orig_msg.edit(content="Generating image...",view=None)
-        global prompt_
-        global IN_USE
-        try:
-            image = await StableDiffusion.generate_image(prompt_=prompt_, style_=style)
-            await interaction.followup.send(
-                content=f"[**ARTSTYLE**: **{styles.get(select_item.values[0])}**] {interaction.user.name} generated: **{prompt_}**",
-                file=discord.File(image), view=upscaleOption())
-            IN_USE = False
-        except:
-            await interaction.followup.send("An error has occurred, most likely the stable diffusion model is not on.")
-
+        await orig_msg.edit(content="Your request has been added to the queue.", view=None)
+        if(QUEUE_IS_EMPTY == True and IS_GENERATING == False):
+            IS_GENERATING = True
+            while(imageRequestsQueue.qsize()>=1):
+                promptFromQ = imageRequestsQueue.get()
+                curStyle = getStyle(promptFromQ)
+                image_Prompt = promptFromQ[len(curStyle)+2:]
+                await interaction.followup.send("Now generating "+ image_Prompt)
+                try:
+                    image = await StableDiffusion.generate_image(prompt_=image_Prompt, style_=curStyle)
+                    await interaction.followup.send(
+                        content=f"[**ARTSTYLE**: **{styles.get(curStyle)}**] {interaction.user.name} generated: **{image_Prompt}**",
+                        file=discord.File(image))
+                except:
+                    await interaction.followup.send("An error has occurred, most likely the stable diffusion model is not on.")
+        IS_GENERATING = False
 
 
 @bot.tree.command(name="genimage", description="Generate an image")
