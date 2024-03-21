@@ -1,4 +1,4 @@
-##Creates an interface between python code and comfyUI using websockets
+##This is a class that incorporates the use of comfyUI
 
 import random
 import websockets
@@ -32,9 +32,7 @@ def get_history(prompt_id):
 
 async def connect():
     global ws
-    ##ensures that there exists a connection
     ws = await websockets.connect(uri)
-
 async def close():
     global ws
     if ws:
@@ -71,10 +69,14 @@ async def get_images(prompt):
             output_images[node_id] = images_output
 
     return output_images
-async def generate_image(prompt_):
+
+
+async def generate_image(prompt_, style_):
     prompt = json.load(open('workflow_api.json'))
-    prompt["6"]["inputs"]["text"] = prompt_
-    prompt["3"]["inputs"]["seed"] = random.randint(0, 999999999999999)
+    prompt["8"]["inputs"]["text_positive"] = prompt_
+    prompt["20"]["inputs"]["seed"] = random.randint(0, 999999999999999)
+    prompt["21"]["inputs"]["seed"] = random.randint(0, 999999999999999)
+    prompt["8"]["inputs"]["style"] = style_
     await connect()
     images = await get_images(prompt)
     await close()
@@ -83,5 +85,6 @@ async def generate_image(prompt_):
             image = Image.open(io.BytesIO(image_data))
             image.save("output.png")
             return "output.png"
+
 
 
