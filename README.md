@@ -1,5 +1,5 @@
 # **Stable cascade discord bot**
-This discord bot interfaces with the ComfyUI API.
+This discord bot interfaces with the ComfyUI API, and uses a queue system for image gen requests.
 
 Stable cascade is a remarkable text-to-image model that can work at a very small latent space. In other words, stable cascade is able to compress images from 1024x1024 to 24x24 pixels without losing details.
 This allows for a faster generation time, while achieving a 16x cost reduction over Stable Diffusion 1.5.
