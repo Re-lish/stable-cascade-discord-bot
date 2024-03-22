@@ -1,5 +1,4 @@
-##This is a class that incorporates the use of comfyUI
-
+##This is a class that interfaces with ComfyUI
 import random
 import websockets
 import uuid
@@ -69,8 +68,7 @@ async def get_images(prompt):
             output_images[node_id] = images_output
 
     return output_images
-
-
+    
 async def generate_image(prompt_, style_):
     prompt = json.load(open('workflow_api.json'))
     prompt["8"]["inputs"]["text_positive"] = prompt_
