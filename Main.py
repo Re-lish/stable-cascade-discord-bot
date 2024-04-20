@@ -60,23 +60,6 @@ class styleMenu(discord.ui.View):
      discord.SelectOption(label="Kawaii", value="misc-kawaii"),
      discord.SelectOption(label="Horror", value="misc-horror")
      ])
-
-    async def select_style(self, interaction: discord.Interaction, select_item: discord.ui.Select):
-   @discord.ui.select(placeholder="Pick a style", options=
-    [discord.SelectOption(label="Anime", value="sai-anime"),
-     discord.SelectOption(label="Hyperrealism", value="artstyle-hyperrealism"),
-     discord.SelectOption(label="Cyberpunk", value="game-cyberpunk game"),
-     discord.SelectOption(label="Pixel art", value="sai-pixel art"),
-     discord.SelectOption(label="Low Poly", value="sai-lowpoly"),
-     discord.SelectOption(label="Graffiti", value="artstyle-graffiti"),
-     discord.SelectOption(label="Minecraft", value="game-minecraft"),
-     discord.SelectOption(label="Manga", value="misc-manga"),
-     discord.SelectOption(label="Cinematic", value="sai-cinematic"),
-     discord.SelectOption(label="Origami", value="sai-origami"),
-     discord.SelectOption(label="Kawaii", value="misc-kawaii"),
-     discord.SelectOption(label="Horror", value="misc-horror")
-     ])
-
     async def select_style(self, interaction: discord.Interaction, select_item: discord.ui.Select):
         global imageRequestsQueue
         global prompt_
