@@ -97,7 +97,7 @@ class styleMenu(discord.ui.View):
                     image = await StableDiffusion.generate_image(prompt_=image_Prompt, style_=curStyle)
                     await interaction.followup.send(
                         content=f"[**ARTSTYLE**: **{styles.get(curStyle)}**] {userName} generated: **{image_Prompt}**",
-                        file=discord.File(image), view=upscaleOption())
+                        file=discord.File(image))
                     imageRequestsQueue.get()
                 except:
                     await interaction.followup.send("An error has occurred, most likely the stable diffusion model is not on.")
