@@ -121,13 +121,11 @@ async def showQueue(interaction: discord.Interaction):
 @bot.tree.command(name="genimage", description="Generate an image")
 async def func(interaction: discord.Interaction, prompt: str):
     global prompt_
-    global IN_USE
-    if(not IN_USE):
-        IN_USE = True
+    if(imageRequestsQueue.qsize() < 10):
         prompt_ = prompt
         await interaction.response.send_message(view=styleMenu())
     else:
-        await interaction.response.send_message("The bot is busy right now, please wait.")
+        await interaction.response.send_message("The queue is full, please wait.")
 
 
 bot.run(os.getenv("TOKEN"))
